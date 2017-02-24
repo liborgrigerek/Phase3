@@ -1,4 +1,4 @@
-Vytvoøení tabulek v postgresql databázi, aby aplikace byla funkèní:
+VytvoÃ¸enÃ­ tabulek v postgresql databÃ¡zi, aby aplikace byla funkÃ¨nÃ­:
 # vytvoreni databaze
 psql -U postgre -W
 CREATE DATABASE morosystems TEMPLATE template0 ENCODING 'UTF8';
@@ -12,6 +12,17 @@ GRANT ALL ON ALL TABLES IN SCHEMA morosystems TO morosystems;
 
 
 # vytvoreni tabulek
+# pokud hlasi terminal psql: FATAL:  Peer authentication failed for user "morosystems"
+# je potreba zmenit v souboru
+# sudo vim /etc/postgresql/9.5/main/pg_hba.conf
+# z
+# local   all             postgres                                peer
+# na
+# local   all             postgres                                md5
+# nezapomenout pote restart psql
+# sudo service postgresql restart
+# viz. http://stackoverflow.com/questions/18664074/getting-error-peer-authentication-failed-for-user-postgres-when-trying-to-ge
+#
 psql -d morosystems -U morosystems -W
 CREATE TABLE morosystems.user2Table
 (id SERIAL NOT NULL,
